@@ -9,27 +9,27 @@ namespace ActivityReporting.App.Api.Controllers
     [Route("[controller]")]
     public class ReportController : ControllerBase
     {
-        private readonly IDatabase iDatabase = new InMemDatabase();
+        private readonly IDatabase iDatabase = Factory.CreateNewInMemDb();
 
         [HttpPost]
         [Route("/activity/{key}")]
-        public async Task<ActionResult> Post([FromBody] ActivityLogReq activity, [FromRoute] string key)
+        public async Task<ActionResult> Post([FromBody] ActivityLog activityLog, [FromRoute] string key)
         {
-            activity.SetKey(key);
-
+            activityLog.SetKey(key);
+            
             await Task
                 .Run(() => iDatabase
-                .Log(activity));
+                .Log(activityLog));
 
             return Ok();
         }
 
         [HttpGet]
         [Route("activity/{key}/total")]
-        public async Task<ActionResult<ActivityResp>> Get(string key)
+        public async Task<ActionResult<ActivityResponse>> Get(string key)
         {
             return Ok(await Task
-                .Run(() => new ActivityResp(iDatabase
+                .Run(() => Factory.CreateNewActivityResponse(iDatabase
                 .Sum(key
                 .ToUpper()))));
         }

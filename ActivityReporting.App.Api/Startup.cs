@@ -4,6 +4,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using System.IO;
+using System;
+using ActivityReporting.App.Api.Model;
+using ActivityReporting.App.Api.Interfaces;
 
 namespace ActivityReporting.App.Api
 {
@@ -12,6 +17,23 @@ namespace ActivityReporting.App.Api
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom
+                .Configuration(configuration)
+                .Enrich
+                .FromLogContext()
+                .WriteTo.File($"../logs/" +
+                $"{DateTime.Now.ToShortDateString().Replace("/","")}.log")
+                .CreateLogger();
+
+            Log.Logger.Information("Application Starting");
+
+            IHost host = Host.CreateDefaultBuilder().ConfigureServices((context,service) => {
+                
+            })
+                .UseSerilog()
+                .Build();
         }
 
         public IConfiguration Configuration { get; }

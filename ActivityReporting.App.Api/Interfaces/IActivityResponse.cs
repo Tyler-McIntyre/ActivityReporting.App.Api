@@ -1,6 +1,6 @@
 ﻿namespace ActivityReporting.App.Api.Model
 {
-    public interface IActivityResp
+    public interface IActivityResponse
     {
         ulong Value { get; init; }
     }

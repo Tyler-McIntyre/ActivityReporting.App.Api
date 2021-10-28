@@ -1,6 +1,4 @@
-﻿using ActivityReporting.App.Api.Interfaces;
-
-namespace ActivityReporting.App.Api.Model
+﻿namespace ActivityReporting.App.Api.Model
 {
     public class Factory
     {
@@ -12,11 +10,6 @@ namespace ActivityReporting.App.Api.Model
         public static IActivityResponse CreateNewActivityResponse(ulong value)
         {
             return new ActivityResponse(value);
-        }
-
-        public static IDatabase CreateNewInMemDb()
-        {
-            return new InMemDatabase();
         }
     }
 }

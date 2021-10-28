@@ -5,9 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog;
-using System.IO;
 using System;
-using ActivityReporting.App.Api.Model;
 using ActivityReporting.App.Api.Interfaces;
 
 namespace ActivityReporting.App.Api
@@ -19,21 +17,15 @@ namespace ActivityReporting.App.Api
             Configuration = configuration;
 
             Log.Logger = new LoggerConfiguration()
-                .ReadFrom
-                .Configuration(configuration)
-                .Enrich
-                .FromLogContext()
-                .WriteTo.File($"../logs/" +
-                $"{DateTime.Now.ToShortDateString().Replace("/","")}.log")
-                .CreateLogger();
+            .ReadFrom
+            .Configuration(Configuration)
+            .Enrich
+            .FromLogContext()
+            .WriteTo.File($"../logs/" +
+            $"{DateTime.Now.ToShortDateString().Replace("/", "")}.log")
+            .CreateLogger();
 
             Log.Logger.Information("Application Starting");
-
-            IHost host = Host.CreateDefaultBuilder().ConfigureServices((context,service) => {
-                
-            })
-                .UseSerilog()
-                .Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -69,6 +61,14 @@ namespace ActivityReporting.App.Api
             {
                 endpoints.MapControllers();
             });
+
+            IHost host = Host.CreateDefaultBuilder().ConfigureServices((context, service) => {
+                service.AddSingleton<InMemDatabase>();
+            })
+                .UseSerilog()
+                .Build();
+
+            _ = ActivatorUtilities.CreateInstance<InMemDatabase>(host.Services);
         }
     }
 }

@@ -10,8 +10,6 @@ namespace ActivityReporting.App.Api.Controllers
     [Route("[controller]")]
     public class ReportController : ControllerBase
     {
-        private readonly IDatabase iDatabase = Factory.CreateNewInMemDb();
-
         [HttpPost]
         [Route("/activity/{key}")]
         public async Task<ActionResult> Post([FromBody] ActivityLog activityLog, [FromRoute] string key)
@@ -21,7 +19,7 @@ namespace ActivityReporting.App.Api.Controllers
             activityLog.SetKey(key);
             
             await Task
-                .Run(() => iDatabase
+                .Run(() => InMemDatabase
                 .Log(activityLog));
 
             return Ok();
@@ -34,9 +32,9 @@ namespace ActivityReporting.App.Api.Controllers
             Log.Logger.Information($"Get Total: {key}");
 
             return Ok(await Task
-                .Run(() => Factory.CreateNewActivityResponse(iDatabase
-                .Sum(key
-                .ToUpper()))));
+                .Run(() => Factory
+                .CreateNewActivityResponse(InMemDatabase
+                .Sum(key))));
         }
     }
 }

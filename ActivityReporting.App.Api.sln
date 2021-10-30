@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivityReporting.App.Api", "ActivityReporting.App.Api\ActivityReporting.App.Api.csproj", "{6B8A1B0C-4704-4454-A4EC-CFCCD6B972EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityReporting.App.Api", "ActivityReporting.App.Api\ActivityReporting.App.Api.csproj", "{6B8A1B0C-4704-4454-A4EC-CFCCD6B972EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActivityReporting.App.UnitTests", "ActivityReporting.App.Tests\ActivityReporting.App.UnitTests.csproj", "{6036DF85-13A3-4038-9320-63B26675AF1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6B8A1B0C-4704-4454-A4EC-CFCCD6B972EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B8A1B0C-4704-4454-A4EC-CFCCD6B972EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B8A1B0C-4704-4454-A4EC-CFCCD6B972EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6036DF85-13A3-4038-9320-63B26675AF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6036DF85-13A3-4038-9320-63B26675AF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6036DF85-13A3-4038-9320-63B26675AF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6036DF85-13A3-4038-9320-63B26675AF1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

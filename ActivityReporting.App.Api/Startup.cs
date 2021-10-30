@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System;
-using ActivityReporting.App.Api.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace ActivityReporting.App.Api
 {
@@ -33,7 +33,7 @@ namespace ActivityReporting.App.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddMemoryCache();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -61,14 +61,6 @@ namespace ActivityReporting.App.Api
             {
                 endpoints.MapControllers();
             });
-
-            IHost host = Host.CreateDefaultBuilder().ConfigureServices((context, service) => {
-                service.AddSingleton<InMemDatabase>();
-            })
-                .UseSerilog()
-                .Build();
-
-            _ = ActivatorUtilities.CreateInstance<InMemDatabase>(host.Services);
         }
     }
 }

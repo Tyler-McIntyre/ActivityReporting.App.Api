@@ -1,15 +1,17 @@
-﻿namespace ActivityReporting.App.Api.Model
+﻿using ActivityReporting.App.Api.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
+
+namespace ActivityReporting.App.Api.Models
 {
     public class Factory
     {
-        public static IActivityLog CreateNewActivityLog() {
+        public static IActivityDto CreateNewActivity() {
 
-            return new ActivityLog();
+            return new ActivityDto();
         }
-
-        public static IActivityResponse CreateNewActivityResponse(ulong value)
+        public static MemoryCacheEntryOptions CreateNewCacheOptions()
         {
-            return new ActivityResponse(value);
+            return new MemoryCacheEntryOptions();
         }
     }
 }
